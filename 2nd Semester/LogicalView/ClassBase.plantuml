@@ -1,0 +1,79 @@
+@startuml CourierManagementSystem
+!theme plain
+
+class Customer {
+    -String customerId
+    -String name
+    -String address
+    -String phoneNumber
+    +placeOrder()
+    +makePayment(paymentDetails)
+    +trackParcel(parcelId)
+}
+
+class Order {
+    -String orderId
+    -String customerId
+    -String parcelId
+    -Date orderDate
+    -String status
+    +addParcel(parcel)
+    +updateStatus(status)
+    +getOrderDetails()
+}
+
+class Parcel {
+    -String parcelId
+    -String status
+    -String origin
+    -String destination
+    -double weight
+    -Date estimatedDeliveryDate
+    +updateStatus(newStatus)
+    +setDestination(destination)
+    +getParcelDetails()
+}
+
+class TrackingInfo {
+    -String trackingId
+    -String parcelId
+    -List<String> statusUpdates
+    +addStatusUpdate(update)
+    +getTrackingDetails()
+}
+
+class Courier {
+    -String courierId
+    -String name
+    -String vehicleNumber
+    -List<String> parcelIds
+    +pickUpParcel(parcel)
+    +deliverParcel(parcel)
+    +updateParcelStatus(parcelId, newStatus)
+}
+
+class TrackingSystem {
+    -List<TrackingInfo> trackingData
+    +trackParcel(parcelId)
+    +updateParcelStatus(parcelId, newStatus)
+}
+
+class Payment {
+    -String paymentId
+    -String orderId
+    -String customerId
+    -double amount
+    -Date paymentDate
+    -String status
+    +processPayment()
+    +getPaymentDetails()
+}
+
+Customer "1" -down- "0..*" Order : places >
+Order "1" --> "1" Parcel : contains >
+Parcel "1" -right- "1" TrackingInfo : tracked by >
+Parcel "1" <-- "1" Courier : delivered by >
+Parcel "1" -up- "1" TrackingSystem : status updated in >
+Order "1" -left- "1" Payment : paid through >
+
+@enduml

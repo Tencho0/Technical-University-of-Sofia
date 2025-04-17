@@ -1,0 +1,20 @@
+@startuml CourierTracking
+
+!theme plain
+
+[*] --> Ordered
+Ordered --> PickedUp : Courier picks up
+Ordered --> Cancelled : Cancelled by customer
+PickedUp --> InTransit : Leaves origin
+InTransit --> OutForDelivery : Arrives at destination city
+OutForDelivery --> Delivered : Delivered to customer
+Delivered --> [*]
+InTransit --> Delayed : Delay detected
+Delayed --> InTransit : Issue resolved
+OutForDelivery --> FailedDeliveryAttempt : Customer not available
+FailedDeliveryAttempt --> OutForDelivery : Attempt delivery again
+FailedDeliveryAttempt --> Returned : Return to sender after max attempts
+Returned --> [*]
+Cancelled --> [*]
+
+@enduml

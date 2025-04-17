@@ -1,0 +1,46 @@
+@startuml CourierManagementSystem
+!theme plain
+
+package "Courier Parcel Tracking and Management System" {
+
+    component [User Interface] as UI
+    component [Business Logic] as BL
+    component [Data Access] as DA
+    component [External Services] as ES
+
+    UI --> BL : Uses
+    BL --> DA : Data Management
+    BL --> ES : Integrates with
+
+    package "Business Logic" {
+        [Order Management] as OM
+        [Payment Processing] as PP
+        [Tracking and Delivery] as TD
+        [Customer Management] as CM
+    }
+
+    package "External Services" {
+        [API Gateway] as AG
+        [Notification Service] as NS
+        [External Payment Service] as EPS
+    }
+
+    package "Data Access" {
+        [Database] as DB
+    }
+
+    UI --> OM : Submits Orders
+    UI --> TD : Requests Tracking
+    UI --> CM : Manages Profile
+    UI --> PP : Processes Payments
+
+    OM --> DB : Queries & Updates
+    PP --> EPS : Initiates Payments
+    TD --> DB : Queries & Updates
+    CM --> DB : Queries & Updates
+
+    TD --> NS : Sends Notifications
+    TD --> AG : Communicates with Courier
+}
+
+@enduml

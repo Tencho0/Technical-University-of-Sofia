@@ -1,0 +1,28 @@
+@startuml CourierManagementSystem
+!theme plain
+
+package "Customer Management" {
+    [Customer]
+    [Order]
+    [Payment]
+}
+
+package "Parcel Management" {
+    [Parcel]
+    [TrackingInfo]
+}
+
+package "Delivery Management" {
+    [Courier]
+}
+
+package "Tracking System" {
+    [TrackingSystem]
+}
+
+package "Parcel Management" --> "Tracking System" : uses >
+package "Customer Management" --> "Parcel Management" : places orders >
+package "Delivery Management" --> "Parcel Management" : delivers parcels >
+package "Customer Management" --> "Tracking System" : tracks parcels >
+
+@enduml

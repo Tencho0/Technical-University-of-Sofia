@@ -1,0 +1,50 @@
+@startuml CourierManagementSystem
+
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+    BackgroundColor<<main>> Wheat
+    BackgroundColor<<secondary>> LightYellow
+}
+
+actor Customer #blue
+actor Courier #darkgreen
+actor "System Administrator" as Admin #purple
+
+rectangle "Courier Parcel Tracking and Management System" {
+  (Track Parcel) as TP <<main>>
+  (Send Parcel) as SP <<main>>
+  (Receive Parcel) as RP <<main>>
+  (Update Parcel Status) as UPS <<main>>
+  (Manage Courier Routes) as MCR <<secondary>>
+  (Generate Reports) as GR <<secondary>>
+  (Register Account) as RA <<secondary>>
+  (Login/Logout) as LL <<secondary>>
+  (Manage Account) as MA <<secondary>>
+  (View Delivery History) as VDH <<secondary>>
+  (Schedule Parcel Pickup) as SPP <<secondary>>
+  (Contact Support) as CS <<secondary>>
+
+  Customer --> TP : "Tracks their parcel\nusing tracking ID"
+  Customer --> SP : "Sends parcel\nby submitting details"
+  Customer --> RP : "Confirms receipt\nof parcel"
+  Customer --> RA : "Registers a new\nuser account"
+  Customer --> LL : "Logs in or out\nof the system"
+  Customer --> MA : "Updates personal\ninformation"
+  Customer --> VDH : "Views past\nparcel deliveries"
+  Customer --> SPP : "Schedules a parcel\npickup time"
+  Customer --> CS : "Reaches out for\nhelp and support"
+
+  Courier --> UPS : "Updates the parcel\nstatus en route"
+  Courier --> SPP : "Accepts parcel\npickup requests"
+  
+  Admin --> MCR : "Optimizes and assigns\ncourier routes"
+  Admin --> GR : "Generates system usage\nand performance reports"
+  Admin --> CS : "Handles escalated\nsupport tickets"
+
+  note right of CS : "Support includes\ntracking issues,\ndelivery disputes,\nand system usage help."
+  note right of UPS : "Status includes\n'Picked up', 'In Transit',\nand 'Delivered'"
+
+}
+
+@enduml
