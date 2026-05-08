@@ -1,0 +1,8 @@
+t,y_raw,y_clean,is_missing,is_outlier
+22,,93.83595,True,False
+23,97.597807,94.87439599999999,False,True
+31,,86.8409035,True,False
+44,,101.64551449999999,True,False
+54,82.737858,85.973329,False,True
+63,,105.57596000000001,True,False
+111,91.286885,106.331526,False,True
